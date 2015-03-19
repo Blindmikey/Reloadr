@@ -20,7 +20,7 @@ TO USE: include reloadr.js and tell it what to check:
 		'/css/layout.css'
 	]);
 */
-
+var continue_poll = true;
 var Reloadr = {
 	options: {
 		frequency: 2000,
@@ -70,10 +70,13 @@ var Reloadr = {
 		for (i in urls)
 			this.ajax.call(this, urls[i], function() {
 				if (this > Date.parse(window._Reloadr_LoadTime))
+					continue_poll = false;
 					location.reload();
 			});
 
-		this.go();
+		if (continue_poll) {
+			this.go();
+		}
 	},
 	init: function(options) {
 		window._Reloadr_LoadTime = new Date();
