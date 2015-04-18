@@ -69,9 +69,10 @@ var Reloadr = {
 		// check 'em
 		for (i in urls)
 			this.ajax.call(this, urls[i], function() {
-				if (this > Date.parse(window._Reloadr_LoadTime))
+				if (this > Date.parse(window._Reloadr_LoadTime)) {
 					continue_poll = false;
 					location.reload();
+				}
 			});
 
 		if (continue_poll) {
